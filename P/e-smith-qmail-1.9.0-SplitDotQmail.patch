@@ -1,0 +1,129 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/00setup mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/00setup
+--- e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/00setup	1969-12-31 17:00:00.000000000 -0700
++++ mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/00setup	2005-09-23 02:09:10.335401976 -0600
+@@ -0,0 +1,18 @@
++{
++    # vim: ft=perl:
++    die "USERNAME not set." unless defined ($USERNAME);
++
++    use esmith::AccountsDB;
++    $adb = esmith::AccountsDB->open_ro or die "Couldn't open AccountsDB";
++
++    $user = $adb->get($USERNAME) or die "No user $USERNAME in AccountsDB";
++
++    %props = $user->props;
++
++    die
++        "Account $USERNAME is not a user account; "
++        . "update email forwarding failed.\n"
++        unless $props{type} eq 'user';
++
++    $OUT = '';
++}
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/10Filter mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/10Filter
+--- e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/10Filter	1969-12-31 17:00:00.000000000 -0700
++++ mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/10Filter	2005-09-23 02:13:06.474503376 -0600
+@@ -0,0 +1,20 @@
++{
++    # vim: ft=perl:
++    $OUT = '';
++
++    $props{Filter} ||= 'yes';
++
++    return '# Filter property is no' 
++	unless ($props{Filter} eq 'yes');
++
++    my $preprocessing = "";
++    my $dt = $qmail{DeliveryType} || '';
++
++    if ($dt eq 'program')
++    {
++        $preprocessing .= '| ';
++    }
++    $preprocessing .= $qmail{DeliveryInstruction} || '';
++
++    $OUT = "$preprocessing\n" if $preprocessing;
++}
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward
+--- e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward	1969-12-31 17:00:00.000000000 -0700
++++ mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward	2005-09-23 02:13:16.427990216 -0600
+@@ -0,0 +1,9 @@
++{
++    # vim: ft=perl:
++    $OUT = '';
++
++    return '# Forward not set' 
++	unless ($props{EmailForward} =~ /^(forward|both)$/);
++
++    return '&' . $props{ForwardAddress};
++}
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/90local mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/90local
+--- e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/90local	1969-12-31 17:00:00.000000000 -0700
++++ mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/90local	2005-09-23 02:13:19.874466272 -0600
+@@ -0,0 +1,9 @@
++{
++    # vim: ft=perl:
++    $OUT = '';
++
++    return '# No local delivery'
++	 unless ($props{EmailForward} =~ /^(local|both)$/);
++
++    return './Maildir/';
++}
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/e-smithForward20 mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/e-smithForward20
+--- e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/e-smithForward20	2005-09-23 02:13:59.616424576 -0600
++++ mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/e-smithForward20	1969-12-31 17:00:00.000000000 -0700
+@@ -1,53 +0,0 @@
+-{
+-    # vim: ft=perl:
+-    $OUT = '';
+-
+-    use esmith::AccountsDB;
+-    my $user = esmith::AccountsDB->open_ro->get($USERNAME);
+-
+-    die "USERNAME not set." unless defined ($USERNAME);
+-
+-    my $type = $user->prop('type');
+-
+-    die
+-        "Account $USERNAME is not a user account; "
+-        . "update email forwarding failed.\n"
+-        unless $type eq 'user';
+-
+-    my $EmailForward = $user->prop("EmailForward");
+-    my $ForwardAddress = $user->prop("ForwardAddress");
+-    my $filter = $user->prop("Filter") || 'yes';
+-
+-    my $default = './Maildir/';
+-    my $preprocessing = "";
+-    my $dt = $qmail{DeliveryType} || '';
+-    if ($dt eq 'program')
+-    {
+-        $preprocessing .= '| ';
+-    }
+-    $preprocessing .= $qmail{DeliveryInstruction} || '';
+-
+-    # Don't preprocess if filter is no.
+-    unless ($filter eq 'yes') { $preprocessing = '' }
+-
+-    $OUT = "$preprocessing\n" if $preprocessing;
+-
+-    if ($EmailForward eq 'local')
+-    {
+-        $OUT .= $default;
+-    }
+-    elsif ($EmailForward eq 'forward')
+-    {
+-        $OUT .= '&' . $ForwardAddress;
+-    }
+-    elsif ($EmailForward eq 'both')
+-    {
+-        $OUT .= '&' . $ForwardAddress . "\n";
+-        $OUT .= $default;
+-    }
+-    else
+-    {
+-        # Shouldn't happen, but default.
+-        $OUT .= $default;
+-    }
+-}

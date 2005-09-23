@@ -2,3 +2,8 @@ Fri Sep 23 01:51:09 2005                       Gordon Rowell (growell)
 
 Mezzanine auto-imported e-smith-qmail from e-smith-qmail-1.9.0-09.src.rpm.
 ----------------------------------------------------------------------
+Fri Sep 23 02:21:47 2005                       Gordon Rowell (growell)
+
+Split up templates-user/.qmail
+
+----------------------------------------------------------------------

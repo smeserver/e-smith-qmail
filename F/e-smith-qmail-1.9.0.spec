@@ -2,7 +2,7 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.9.0
-%define release 09
+%define release 09sme01
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -14,6 +14,7 @@ Patch2: e-smith-qmail-1.9.0-04.mitel_patch
 Patch3: e-smith-qmail-1.9.0-05.mitel_patch
 Patch4: e-smith-qmail-1.9.0-08.mitel_patch
 Patch5: e-smith-qmail-1.9.0-09.mitel_patch
+Patch6: e-smith-qmail-1.9.0-SplitDotQmail.patch
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
@@ -28,6 +29,13 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Fri Sep 23 2005 Gordon Rowell <gordonr@e-smith.com>
+- [1.9.0-09sme01]
+- Split up templates-user/.qmail into fragments which return 
+  one or zero lines. It's much cleaner and helps with add-ons [SF: 1252336]
+- TODO: Remove the 10Filter stuff and migrate 
+  qmail{DeliveryInstruction} and qmail{DeliveryType} 
+
 * Mon Sep 19 2005 Gordon Rowell <gordonr@e-smith.com>
 - [1.9.0-09]
 - Correct /var/qmail/users/assign/50system fragment so that
@@ -183,6 +191,7 @@ Startup scripts for Dan Bernstein's qmail package.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 perl createlinks
