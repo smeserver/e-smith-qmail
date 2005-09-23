@@ -1,0 +1,22 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward
+--- e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward	2005-09-23 04:16:41.596233528 -0600
++++ mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward	2005-09-23 04:16:01.518326296 -0600
+@@ -1,7 +1,5 @@
+ {
+     # vim: ft=perl:
+-    $OUT = '';
+-
+     return '# Forward not set' 
+ 	unless ($props{EmailForward} =~ /^(forward|both)$/);
+ 
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/90local mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/90local
+--- e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/90local	2005-09-23 04:16:41.597233376 -0600
++++ mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/90local	2005-09-23 04:16:30.322947328 -0600
+@@ -1,7 +1,5 @@
+ {
+     # vim: ft=perl:
+-    $OUT = '';
+-
+     return '# No local delivery'
+ 	 unless ($props{EmailForward} =~ /^(local|both)$/);
+ 
