@@ -1,0 +1,22 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward
+--- e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward	2005-09-26 06:16:45.966613288 -0600
++++ mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward	1969-12-31 17:00:00.000000000 -0700
+@@ -1,7 +0,0 @@
+-{
+-    # vim: ft=perl:
+-    return '# Forward not set' 
+-	unless ($props{EmailForward} =~ /^(forward|both)$/);
+-
+-    return '&' . $props{ForwardAddress};
+-}
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/70Forward mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/70Forward
+--- e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/70Forward	1969-12-31 17:00:00.000000000 -0700
++++ mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/70Forward	2005-09-23 04:16:01.000000000 -0600
+@@ -0,0 +1,7 @@
++{
++    # vim: ft=perl:
++    return '# Forward not set' 
++	unless ($props{EmailForward} =~ /^(forward|both)$/);
++
++    return '&' . $props{ForwardAddress};
++}
