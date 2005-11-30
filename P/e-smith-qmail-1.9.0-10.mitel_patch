@@ -1,6 +1,7 @@
-diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/00setup mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/00setup
---- e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/00setup	1969-12-31 17:00:00.000000000 -0700
-+++ mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/00setup	2005-09-23 02:09:10.335401976 -0600
+Index: e-smith-qmail/e-smith-qmail.spec
+diff -u /dev/null e-smith-qmail/root/etc/e-smith/templates-user/.qmail/00setup:1.1
+--- /dev/null	Mon Sep 26 10:46:39 2005
++++ e-smith-qmail/root/etc/e-smith/templates-user/.qmail/00setup	Mon Sep 26 10:45:26 2005
 @@ -0,0 +1,18 @@
 +{
 +    # vim: ft=perl:
@@ -20,9 +21,10 @@ diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-
 +
 +    $OUT = '';
 +}
-diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/10Filter mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/10Filter
---- e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/10Filter	1969-12-31 17:00:00.000000000 -0700
-+++ mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/10Filter	2005-09-23 02:13:06.474503376 -0600
+Index: e-smith-qmail/root/etc/e-smith/templates-user/.qmail/10Filter
+diff -u /dev/null e-smith-qmail/root/etc/e-smith/templates-user/.qmail/10Filter:1.1
+--- /dev/null	Mon Sep 26 10:46:39 2005
++++ e-smith-qmail/root/etc/e-smith/templates-user/.qmail/10Filter	Mon Sep 26 10:45:26 2005
 @@ -0,0 +1,20 @@
 +{
 +    # vim: ft=perl:
@@ -44,35 +46,34 @@ diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-
 +
 +    $OUT = "$preprocessing\n" if $preprocessing;
 +}
-diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward
---- e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward	1969-12-31 17:00:00.000000000 -0700
-+++ mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/20Forward	2005-09-23 02:13:16.427990216 -0600
-@@ -0,0 +1,9 @@
+Index: e-smith-qmail/root/etc/e-smith/templates-user/.qmail/70Forward
+diff -u /dev/null e-smith-qmail/root/etc/e-smith/templates-user/.qmail/70Forward:1.1
+--- /dev/null	Mon Sep 26 10:46:39 2005
++++ e-smith-qmail/root/etc/e-smith/templates-user/.qmail/70Forward	Mon Sep 26 10:45:26 2005
+@@ -0,0 +1,7 @@
 +{
 +    # vim: ft=perl:
-+    $OUT = '';
-+
 +    return '# Forward not set' 
 +	unless ($props{EmailForward} =~ /^(forward|both)$/);
 +
 +    return '&' . $props{ForwardAddress};
 +}
-diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/90local mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/90local
---- e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/90local	1969-12-31 17:00:00.000000000 -0700
-+++ mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/90local	2005-09-23 02:13:19.874466272 -0600
-@@ -0,0 +1,9 @@
+Index: e-smith-qmail/root/etc/e-smith/templates-user/.qmail/90local
+diff -u /dev/null e-smith-qmail/root/etc/e-smith/templates-user/.qmail/90local:1.1
+--- /dev/null	Mon Sep 26 10:46:39 2005
++++ e-smith-qmail/root/etc/e-smith/templates-user/.qmail/90local	Mon Sep 26 10:45:26 2005
+@@ -0,0 +1,7 @@
 +{
 +    # vim: ft=perl:
-+    $OUT = '';
-+
 +    return '# No local delivery'
 +	 unless ($props{EmailForward} =~ /^(local|both)$/);
 +
 +    return './Maildir/';
 +}
-diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/e-smithForward20 mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/e-smithForward20
---- e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/e-smithForward20	2005-09-23 02:13:59.616424576 -0600
-+++ mezzanine_patched_e-smith-qmail-1.9.0/root/etc/e-smith/templates-user/.qmail/e-smithForward20	1969-12-31 17:00:00.000000000 -0700
+Index: e-smith-qmail/root/etc/e-smith/templates-user/.qmail/e-smithForward20
+diff -u e-smith-qmail/root/etc/e-smith/templates-user/.qmail/e-smithForward20:1.1 e-smith-qmail/root/etc/e-smith/templates-user/.qmail/e-smithForward20:removed
+--- e-smith-qmail/root/etc/e-smith/templates-user/.qmail/e-smithForward20:1.1	Tue Aug  9 16:31:35 2005
++++ e-smith-qmail/root/etc/e-smith/templates-user/.qmail/e-smithForward20	Wed Dec 31 19:00:00 1969
 @@ -1,53 +0,0 @@
 -{
 -    # vim: ft=perl:

@@ -2,7 +2,7 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.9.0
-%define release 09sme03
+%define release 15
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -14,9 +14,12 @@ Patch2: e-smith-qmail-1.9.0-04.mitel_patch
 Patch3: e-smith-qmail-1.9.0-05.mitel_patch
 Patch4: e-smith-qmail-1.9.0-08.mitel_patch
 Patch5: e-smith-qmail-1.9.0-09.mitel_patch
-Patch6: e-smith-qmail-1.9.0-SplitDotQmail.patch
-Patch7: e-smith-qmail-1.9.0-SplitDotQmail.patch2
-Patch8: e-smith-qmail-1.9.0-SplitDotQmail.patch3
+Patch6: e-smith-qmail-1.9.0-10.mitel_patch
+Patch7: e-smith-qmail-1.9.0-11.mitel_patch
+Patch8: e-smith-qmail-1.9.0-12.mitel_patch
+Patch9: e-smith-qmail-1.9.0-13.mitel_patch
+Patch10: e-smith-qmail-1.9.0-14.mitel_patch
+Patch11: e-smith-qmail-1.9.0-15.mitel_patch
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
@@ -31,19 +34,39 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
-* Mon Sep 26 2005 Gordon Rowell <gordonr@e-smith.com>
-- [1.9.0-09sme03]
-- Move .qmail/20Forward -> 70Forward to leave more room for
-  add-ons [SF: 1252336]
+* Tue Nov 22 2005 Charlie Brady <charlieb@e-smith.com>
+- [1.9.0-15]
+- Fix broken symlink in group-delete event. Delete -default .qmail file
+  when deleting group. [SF: 1363973]
 
-* Fri Sep 23 2005 Gordon Rowell <gordonr@e-smith.com>
-- [1.9.0-09sme02]
-- Minor fixups - thanks Stephen Noble [SF: 1252336]
+* Tue Nov  1 2005 Charlie Brady <charlieb@e-smith.com>
+- [1.9.0-14]
+- Improve /var/qmail/users/assign/70pseudonyms error handling. [SF: 1337029]
+- Fix error text from 60users template fragment. [SF: 1345206]
 
-* Fri Sep 23 2005 Gordon Rowell <gordonr@e-smith.com>
-- [1.9.0-09sme01]
+* Fri Oct 21 2005 Gordon Rowell <gordonr@e-smith.com>
+- [1.9.0-13]
+- Add quotes around 'Recipient unknown' when calling bouncesaying.
+  Otherwise we're trying to call a program called 'unknown' [SF: 1334002]
+
+* Wed Oct 19 2005 Charlie Brady <charlieb@e-smith.com>
+- [1.9.0-12]
+- Ensure failsafe .qmail file if EmailForward property is not set.
+  [SF: 1330452]
+
+* Fri Oct  7 2005 Charlie Brady <charlieb@e-smith.com>
+- [1.9.0-11]
+- Expand virtualdomains in pseudonym-* events. Replace use of control/1
+  by generic actions, plus qmail-newu symlinked into event directories.
+  [SF: 1311349]
+
+* Mon Sep 26 2005 Gordon Rowell <gordonr@gormand.com.au>
+- [1.9.0-10]
 - Split up templates-user/.qmail into fragments which return 
-  one or zero lines. It's much cleaner and helps with add-ons [SF: 1252336]
+  one or zero lines. It's much cleaner and helps with add-ons.
+  Move .qmail/20Forward -> 70Forward to leave more room for
+  add-ons [SF: 1252336]
+- Minor fixups - thanks Stephen Noble [SF: 1252336]
 - TODO: Remove the 10Filter stuff and migrate 
   qmail{DeliveryInstruction} and qmail{DeliveryType} 
 
@@ -205,6 +228,9 @@ Startup scripts for Dan Bernstein's qmail package.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
+%patch10 -p1
+%patch11 -p1
 
 %build
 perl createlinks
