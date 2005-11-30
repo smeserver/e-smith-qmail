@@ -2,7 +2,7 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.9.0
-%define release 15
+%define release 16
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -34,6 +34,9 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Wed Nov 30 2005 Gordon Rowell <gordonr@gormand.com.au> 1.9.0-16
+- Bump release number only
+
 * Tue Nov 22 2005 Charlie Brady <charlieb@e-smith.com>
 - [1.9.0-15]
 - Fix broken symlink in group-delete event. Delete -default .qmail file
