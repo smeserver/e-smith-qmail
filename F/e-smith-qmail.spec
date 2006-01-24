@@ -2,12 +2,13 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.9.1
-%define release 01
+%define release 02
 Version: %{version}
 Release: %{release}
 License: GPL
 Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
+Patch0: e-smith-qmail-1.9.0-createlinks.fix_patch
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
@@ -22,6 +23,10 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Tue Jan 24 2006 Charlie Brady <charlieb@e-smith.com> 1.9.1-02
+- Fix duplicate symlink creation attempt in bootstrap-console-save
+  directory (during RPM build). [SME: 555]
+
 * Wed Jan 11 2006 Gordon Rowell <gordonr@gormand.com.au> 1.9.1-01
 - Roll patches to 1.9.0-16
 - Change ~alias/.qmail{default,localdelivery-default,shared} into
@@ -215,6 +220,7 @@ Startup scripts for Dan Bernstein's qmail package.
 
 %prep
 %setup
+%patch0 -p1
 
 %build
 perl createlinks

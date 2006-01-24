@@ -1,0 +1,12 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.1/createlinks mezzanine_patched_e-smith-qmail-1.9.1/createlinks
+--- e-smith-qmail-1.9.1/createlinks	2006-01-11 02:04:56.000000000 -0500
++++ mezzanine_patched_e-smith-qmail-1.9.1/createlinks	2006-01-24 14:19:22.000000000 -0500
+@@ -191,7 +191,7 @@
+ #--------------------------------------------------
+ foreach $event ( qw(pseudonym-create pseudonym-modify pseudonym-delete
+ 		    user-create user-modify user-delete
+-		    bootstrap-console-save) )
++		))
+ {
+     templates2events("/var/qmail/control/virtualdomains", $event);
+     templates2events("/var/qmail/users/assign", $event);
