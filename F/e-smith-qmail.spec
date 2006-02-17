@@ -2,7 +2,7 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.9.1
-%define release 03
+%define release 04
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -10,6 +10,7 @@ Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
 Patch0: e-smith-qmail-1.9.0-createlinks.fix_patch
 Patch1: e-smith-qmail-1.9.0-admin_delivery.patch
+Patch2: e-smith-qmail-1.9.0-admin_delivery.patch2
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
@@ -24,6 +25,9 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Thu Feb 16 2006 Charlie Brady <charlieb@e-smith.com> 1.9.1-04
+  Fix migration when AdminEmail is not set. [SME: 818]
+
 * Thu Feb 16 2006 Charlie Brady <charlieb@e-smith.com> 1.9.1-03
 - Use standard user .qmail template for admin user. Migrate
   AdminEmail setting to $admin{ForwardAddress}. [SME: 818]
@@ -227,6 +231,7 @@ Startup scripts for Dan Bernstein's qmail package.
 %setup
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 perl createlinks

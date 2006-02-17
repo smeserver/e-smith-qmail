@@ -1,0 +1,31 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.1/root/etc/e-smith/db/accounts/migrate/10AdminEmail mezzanine_patched_e-smith-qmail-1.9.1/root/etc/e-smith/db/accounts/migrate/10AdminEmail
+--- e-smith-qmail-1.9.1/root/etc/e-smith/db/accounts/migrate/10AdminEmail	2006-02-16 21:55:53.000000000 -0500
++++ mezzanine_patched_e-smith-qmail-1.9.1/root/etc/e-smith/db/accounts/migrate/10AdminEmail	2006-02-16 21:55:42.000000000 -0500
+@@ -3,12 +3,22 @@
+     return unless $conf;
+ 
+     my $admin_email = $conf->get_value_and_delete('AdminEmail');
+-    return unless $admin_email;
++    return unless defined $admin_email;
+ 
+     my $admin = $DB->get('admin') ||
+ 		$DB->new_record('admin', {type => 'system'});
+-    $admin->merge_props(
+-	    EmailForward => 'forward',
+-	    ForwardAddress => $admin_email,
+-	);
++    if ($admin_email)
++    {
++	$admin->merge_props(
++		EmailForward => 'forward',
++		ForwardAddress => $admin_email,
++	    );
++    }
++    else
++    {
++	$admin->merge_props(
++		EmailForward => 'local',
++		ForwardAddress => '',
++	    );
++    }
+ }
