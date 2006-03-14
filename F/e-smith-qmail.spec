@@ -1,17 +1,13 @@
 Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
-%define version 1.9.1
-%define release 05
+%define version 1.10.0
+%define release 01
 Version: %{version}
 Release: %{release}
 License: GPL
 Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
-Patch0: e-smith-qmail-1.9.0-createlinks.fix_patch
-Patch1: e-smith-qmail-1.9.0-admin_delivery.patch
-Patch2: e-smith-qmail-1.9.0-admin_delivery.patch2
-Patch3: e-smith-qmail-1.9.0-shared-default.patch
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
@@ -26,6 +22,9 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Tue Mar 14 2006 Charlie Brady <charlie_brady@mitel.com> 1.10.0-01
+- Roll stable stream version. [SME: 1016]
+
 * Fri Mar 03 2006 Charlie Brady <charlie_brady@mitel.com> 1.9.1-05
 - Add ~alias/.qmail-shared-default symlink. [SME: 764]
 
@@ -233,10 +232,6 @@ Startup scripts for Dan Bernstein's qmail package.
 
 %prep
 %setup
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 %build
 perl createlinks
