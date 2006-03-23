@@ -2,12 +2,13 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.10.0
-%define release 01
+%define release 02
 Version: %{version}
 Release: %{release}
 License: GPL
 Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
+Patch0: e-smith-qmail-1.10.0.no_connect_zero.patch
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
@@ -17,11 +18,15 @@ Requires: dot-forward
 Requires: fastforward
 Requires: runit
 Requires: e-smith-email
+Requires: qmail-workaround
 Provides: e-smith-mta
 Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Thu Mar 23 2006 Charlie Brady <charlie_brady@mitel.com> 1.10.0-02
+- Use shared library to block 0.0.0.0 MX mail loops. [SME: 1116]
+
 * Tue Mar 14 2006 Charlie Brady <charlie_brady@mitel.com> 1.10.0-01
 - Roll stable stream version. [SME: 1016]
 
@@ -232,6 +237,7 @@ Startup scripts for Dan Bernstein's qmail package.
 
 %prep
 %setup
+%patch0 -p1
 
 %build
 perl createlinks
