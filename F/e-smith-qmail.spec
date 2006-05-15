@@ -2,7 +2,7 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.10.0
-%define release 05sme01
+%define release 06
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -27,6 +27,9 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Mon May 15 2006 Gordon Rowell <gordonr@gormand.com.au> 1.10.0-06
+- Bump version only [SME: 1415]
+
 * Wed May 10 2006 Gordon Rowell <gordonr@gormand.com.au> 1.10.0-05sme01
 - Allow optional MailServer property of domains db records and
   deliver mail in this order of preference:
