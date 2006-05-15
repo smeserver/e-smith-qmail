@@ -2,7 +2,7 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.10.0
-%define release 04sme01
+%define release 05sme01
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -11,6 +11,7 @@ Source: %{name}-%{version}.tar.gz
 Patch0: e-smith-qmail-1.10.0.no_connect_zero.patch
 Patch1: e-smith-qmail-1.10.0-update-groups.patch
 Patch2: e-smith-qmail-1.10.0-DomainMailOnly.patch
+Patch3: e-smith-qmail-1.10.0-MailRouting.patch 
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
@@ -26,6 +27,18 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Wed May 10 2006 Gordon Rowell <gordonr@gormand.com.au> 1.10.0-05sme01
+- Allow optional MailServer property of domains db records and
+  deliver mail in this order of preference:
+  - As per the MailServer property of the domain
+  - $DelegateMailServer 
+  - localhost (i.e. locally)
+  NOTE: 
+  - If DelegateMailServer is not set, the users must exist on the
+    gateway or mail will be rejected
+  - If DelegateMailServer is set, all mail for the domain will be
+    forwarded to the relevant internal mail server
+
 * Wed May 10 2006 Gordon Rowell <gordonr@gormand.com.au> 1.10.0-04sme01
 - Remove virtualdomains entries for hosts db entries. We only
   handle mail for domains without customisation [SME: 1415]
@@ -249,6 +262,7 @@ Startup scripts for Dan Bernstein's qmail package.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 perl createlinks

@@ -1,9 +1,0 @@
-diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.9.1/createlinks mezzanine_patched_e-smith-qmail-1.9.1/createlinks
---- e-smith-qmail-1.9.1/createlinks	2006-03-03 18:52:43.000000000 -0500
-+++ mezzanine_patched_e-smith-qmail-1.9.1/createlinks	2006-03-03 18:52:15.000000000 -0500
-@@ -205,4 +205,5 @@
- service_link_enhanced("qmail", "K60", "1");
- 
- safe_symlink(".qmail", "root/home/e-smith/.qmail-default");
-+safe_symlink(".qmail-shared", "root/var/qmail/alias/.qmail-shared-default");
- 
