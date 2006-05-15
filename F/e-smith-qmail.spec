@@ -2,7 +2,7 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.10.0
-%define release 03
+%define release 04sme01
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -10,6 +10,7 @@ Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
 Patch0: e-smith-qmail-1.10.0.no_connect_zero.patch
 Patch1: e-smith-qmail-1.10.0-update-groups.patch
+Patch2: e-smith-qmail-1.10.0-DomainMailOnly.patch
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
@@ -25,6 +26,10 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Wed May 10 2006 Gordon Rowell <gordonr@gormand.com.au> 1.10.0-04sme01
+- Remove virtualdomains entries for hosts db entries. We only
+  handle mail for domains without customisation [SME: 1415]
+
 * Sat Apr  8 2006 Charlie Brady <charlie_brady@mitel.com> 1.10.0-03
 - Update group .qmail files when deleting/modifying users. [SME: 1200]
 
@@ -243,6 +248,7 @@ Startup scripts for Dan Bernstein's qmail package.
 %setup
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 perl createlinks
