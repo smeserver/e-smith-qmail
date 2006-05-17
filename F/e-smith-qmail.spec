@@ -40,7 +40,7 @@ AutoReqProv: no
   - If DelegateMailServer is not set, the users must exist on the
     gateway or mail will be rejected
   - If DelegateMailServer is set, all mail for the domain will be
-    forwarded to the relevant internal mail server
+    forwarded to the relevant internal mail server [SME: 1253]
 
 * Wed May 10 2006 Gordon Rowell <gordonr@gormand.com.au> 1.10.0-04sme01
 - Remove virtualdomains entries for hosts db entries. We only
