@@ -2,7 +2,7 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.10.0
-%define release 06
+%define release 07
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -12,6 +12,7 @@ Patch0: e-smith-qmail-1.10.0.no_connect_zero.patch
 Patch1: e-smith-qmail-1.10.0-update-groups.patch
 Patch2: e-smith-qmail-1.10.0-DomainMailOnly.patch
 Patch3: e-smith-qmail-1.10.0-MailRouting.patch 
+Patch4: e-smith-qmail-1.10.0-MaxMessageSize.patch
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
@@ -27,6 +28,9 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Thu Jun 22 2006 Gordon Rowell <gordonr@gormand.com.au> 1.10.0-07
+- Default qmail{MaxMessageSize} to 15,000,000 bytes [SME: 1624]
+
 * Mon May 15 2006 Gordon Rowell <gordonr@gormand.com.au> 1.10.0-06
 - Bump version only [SME: 1415]
 
@@ -266,6 +270,7 @@ Startup scripts for Dan Bernstein's qmail package.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 perl createlinks
