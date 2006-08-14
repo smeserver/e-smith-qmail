@@ -2,7 +2,7 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.10.0
-%define release 08
+%define release 09
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -14,6 +14,7 @@ Patch2: e-smith-qmail-1.10.0-DomainMailOnly.patch
 Patch3: e-smith-qmail-1.10.0-MailRouting.patch 
 Patch4: e-smith-qmail-1.10.0-MaxMessageSize.patch
 Patch5: e-smith-qmail-1.10.0-helohost.patch
+Patch6: e-smith-qmail-1.10.0-ExcludeFromEveryoneEmail.patch
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
@@ -29,6 +30,11 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Mon Aug 14 2006 Gordon Rowell <gordonr@gormand.com.au> 1.10.0-09
+- Allow optional EveryoneEmail property of user and 'admin' accounts
+  If set to 'no', do not include this user in the shared/everyone
+  email alias [SME: 1842]
+
 * Thu Aug 3 2006 Gordon Rowell <gordonr@gormand.com.au> 1.10.0-08
 - Allow optional $smtpd{HeloHost} value for configuring HELO host,
   defaulting to $DomainName [SME: 1790]
@@ -277,6 +283,7 @@ Startup scripts for Dan Bernstein's qmail package.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 perl createlinks
