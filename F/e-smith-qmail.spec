@@ -2,7 +2,7 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.10.0
-%define release 09
+%define release 10
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -15,6 +15,7 @@ Patch3: e-smith-qmail-1.10.0-MailRouting.patch
 Patch4: e-smith-qmail-1.10.0-MaxMessageSize.patch
 Patch5: e-smith-qmail-1.10.0-helohost.patch
 Patch6: e-smith-qmail-1.10.0-ExcludeFromEveryoneEmail.patch
+Patch7: e-smith-qmail-1.10.0-forcejunkmaildir.patch
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
@@ -30,6 +31,10 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Fri Aug 25 2006 Gordon Rowell <gordonr@gormand.com.au> 1.10.0-10
+- Force creation of junkmail folder as some users like to delete
+  it [SME: 1130]
+
 * Mon Aug 14 2006 Gordon Rowell <gordonr@gormand.com.au> 1.10.0-09
 - Allow optional EveryoneEmail property of user and 'admin' accounts
   If set to 'no', do not include this user in the shared/everyone
@@ -284,6 +289,7 @@ Startup scripts for Dan Bernstein's qmail package.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 perl createlinks
