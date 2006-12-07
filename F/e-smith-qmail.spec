@@ -4,7 +4,8 @@ Name: %{name}
 %define version 1.10.0
 %define release 10
 Version: %{version}
-Release: %{release}
+Release: %smerelease %{release}
+Packager: %{_packager}
 License: GPL
 Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
@@ -16,7 +17,6 @@ Patch4: e-smith-qmail-1.10.0-MaxMessageSize.patch
 Patch5: e-smith-qmail-1.10.0-helohost.patch
 Patch6: e-smith-qmail-1.10.0-ExcludeFromEveryoneEmail.patch
 Patch7: e-smith-qmail-1.10.0-forcejunkmaildir.patch
-Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
 BuildArchitectures: noarch
@@ -31,6 +31,10 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Thu Dec 07 2006 Shad L. Lords <slords@mail.com>
+- Update to new release naming.  No functional changes.
+- Make Packager generic
+
 * Fri Aug 25 2006 Gordon Rowell <gordonr@gormand.com.au> 1.10.0-10
 - Force creation of junkmail folder as some users like to delete
   it [SME: 1130]
