@@ -2,7 +2,7 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.10.0
-%define release 10
+%define release 11
 Version: %{version}
 Release: %smerelease %{release}
 Packager: %{_packager}
@@ -17,6 +17,7 @@ Patch4: e-smith-qmail-1.10.0-MaxMessageSize.patch
 Patch5: e-smith-qmail-1.10.0-helohost.patch
 Patch6: e-smith-qmail-1.10.0-ExcludeFromEveryoneEmail.patch
 Patch7: e-smith-qmail-1.10.0-forcejunkmaildir.patch
+Patch8: e-smith-qmail-1.10.0-qmailadmin.patch
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
 BuildArchitectures: noarch
@@ -31,6 +32,9 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Mon Jan 22 2007 Shad L. Lords <slords@mail.com> 1.10.0-11
+- Allow admin user to be configured via users panel. [SME: 827]
+
 * Thu Dec 07 2006 Shad L. Lords <slords@mail.com>
 - Update to new release naming.  No functional changes.
 - Make Packager generic
@@ -294,6 +298,7 @@ Startup scripts for Dan Bernstein's qmail package.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 
 %build
 perl createlinks
