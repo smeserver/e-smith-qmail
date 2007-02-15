@@ -2,7 +2,7 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.10.0
-%define release 11
+%define release 12
 Version: %{version}
 Release: %smerelease %{release}
 Packager: %{_packager}
@@ -18,6 +18,7 @@ Patch5: e-smith-qmail-1.10.0-helohost.patch
 Patch6: e-smith-qmail-1.10.0-ExcludeFromEveryoneEmail.patch
 Patch7: e-smith-qmail-1.10.0-forcejunkmaildir.patch
 Patch8: e-smith-qmail-1.10.0-qmailadmin.patch
+Patch9: e-smith-qmail-1.10.0-sv.patch
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
 BuildArchitectures: noarch
@@ -28,10 +29,14 @@ Requires: runit
 Requires: e-smith-email
 Requires: qmail-workaround
 Provides: e-smith-mta
+Conflicts: runit < 1.7
 Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Thu Feb 15 2007 Charlie Brady <charlie_brady@mitel.com>
+- Use sv rather than deprecated runsvctrl in ip-up script. [SME: 2486]
+
 * Mon Jan 22 2007 Shad L. Lords <slords@mail.com> 1.10.0-11
 - Allow admin user to be configured via users panel. [SME: 827]
 
@@ -299,6 +304,7 @@ Startup scripts for Dan Bernstein's qmail package.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 perl createlinks
