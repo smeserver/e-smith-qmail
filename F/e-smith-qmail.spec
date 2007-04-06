@@ -2,7 +2,7 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.10.0
-%define release 12
+%define release 13
 Version: %{version}
 Release: %smerelease %{release}
 Packager: %{_packager}
@@ -34,6 +34,9 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Fri Apr 06 2007 Shad L. Lords <slords@mail.com> 1.10.0-13
+- Change ownership/perms on /var/qmail/alias directory [SME: 2709]
+
 * Thu Feb 15 2007 Charlie Brady <charlie_brady@mitel.com>
 - Use sv rather than deprecated runsvctrl in ip-up script. [SME: 2486]
 
@@ -333,6 +336,7 @@ rm -f %{name}-%{version}-%{release}-filelist
     --file '/var/service/qmail/log/run' 'attr(0755,root,root)' \
     --dir '/var/service/qmail/log/supervise' 'attr(0700,root,root)' \
     --dir '/var/log/qmail' 'attr(2750,qmaill,nofiles)' \
+    --dir '/var/qmail/alias' 'attr(2755,alias,qmail)' \
     > %{name}-%{version}-%{release}-filelist
 echo "%doc COPYING" >> %{name}-%{version}-%{release}-filelist
 
