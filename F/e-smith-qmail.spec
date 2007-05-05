@@ -4,8 +4,7 @@ Name: %{name}
 %define version 1.10.0
 %define release 13
 Version: %{version}
-Release: %smerelease %{release}
-Packager: %{_packager}
+Release: %{release}%{?dist}
 License: GPL
 Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
@@ -34,6 +33,9 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Sun Apr 29 2007 Shad L. Lords <slords@mail.com>
+- Clean up spec so package can be built by koji/plague
+
 * Fri Apr 06 2007 Shad L. Lords <slords@mail.com> 1.10.0-13
 - Change ownership/perms on /var/qmail/alias directory [SME: 2709]
 
