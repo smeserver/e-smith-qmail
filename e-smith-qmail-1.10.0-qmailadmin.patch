@@ -1,0 +1,29 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.10.0/createlinks mezzanine_patched_e-smith-qmail-1.10.0/createlinks
+--- e-smith-qmail-1.10.0/createlinks	2007-01-22 09:08:46.000000000 -0700
++++ mezzanine_patched_e-smith-qmail-1.10.0/createlinks	2007-01-22 09:07:29.000000000 -0700
+@@ -167,6 +167,13 @@
+ event_link("qmail-update-group", $event, "20");
+ 
+ #--------------------------------------------------
++# actions for user-modify-admin event
++#--------------------------------------------------
++$event = "user-modify-admin";
++
++event_link("qmail-update-user", $event, "20");
++
++#--------------------------------------------------
+ # actions for user-delete event
+ #--------------------------------------------------
+ $event = "user-delete";
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.10.0/root/etc/e-smith/events/actions/qmail-update-user mezzanine_patched_e-smith-qmail-1.10.0/root/etc/e-smith/events/actions/qmail-update-user
+--- e-smith-qmail-1.10.0/root/etc/e-smith/events/actions/qmail-update-user	2006-03-14 12:51:57.000000000 -0700
++++ mezzanine_patched_e-smith-qmail-1.10.0/root/etc/e-smith/events/actions/qmail-update-user	2007-01-22 09:08:23.000000000 -0700
+@@ -41,7 +41,7 @@
+     my $user = $accountsdb->get($userName);
+     die
+ 	"Account $userName is not a user account; update email forwarding failed.\n"
+-	unless ($user && $user->prop('type') eq "user");
++	unless $userName eq 'admin' || ($user && $user->prop('type') eq "user");
+     @users = ($user);
+ }
+ else

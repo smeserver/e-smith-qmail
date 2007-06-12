@@ -1,0 +1,25 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.10.0/root/var/service/qmail/run mezzanine_patched_e-smith-qmail-1.10.0/root/var/service/qmail/run
+--- e-smith-qmail-1.10.0/root/var/service/qmail/run	2006-01-11 02:04:56.000000000 -0500
++++ mezzanine_patched_e-smith-qmail-1.10.0/root/var/service/qmail/run	2006-03-23 16:46:49.000000000 -0500
+@@ -1,7 +1,7 @@
+ #!/bin/sh
+ 
+ #----------------------------------------------------------------------
+-# copyright (C) 2002 Mitel Networks Corporation
++# copyright (C) 2002-2006 Mitel Networks Corporation
+ # 
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+@@ -17,11 +17,10 @@
+ # along with this program; if not, write to the Free Software
+ # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+ # 
+-# Technical support for this program is available from Mitel Networks 
+-# Please visit our web site www.e-smith.com for details.
+ #----------------------------------------------------------------------
+ exec									\
+     /usr/bin/env - PATH="/var/qmail/bin:/bin:/usr/bin:/usr/local/bin"	\
++    LD_PRELOAD=$(pwd)/no_connect_zero.so \
+     /var/qmail/bin/qmail-start						\
+     ./Maildir/								\
+     2>&1

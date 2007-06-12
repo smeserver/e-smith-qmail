@@ -1,0 +1,64 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.10.0/root/etc/e-smith/templates/var/qmail/control/smtproutes/10delegateMailServer mezzanine_patched_e-smith-qmail-1.10.0/root/etc/e-smith/templates/var/qmail/control/smtproutes/10delegateMailServer
+--- e-smith-qmail-1.10.0/root/etc/e-smith/templates/var/qmail/control/smtproutes/10delegateMailServer	2006-01-11 18:04:56.000000000 +1100
++++ mezzanine_patched_e-smith-qmail-1.10.0/root/etc/e-smith/templates/var/qmail/control/smtproutes/10delegateMailServer	2006-05-10 17:46:33.950740208 +1000
+@@ -1,20 +1,17 @@
+ {
+     $OUT = "";
+ 
+-    #--------------------------------------------------
+-    # First check for delegate mail server
+-    #--------------------------------------------------
++    use esmith::DomainsDB;
++    my $ddb = esmith::DomainsDB->open_ro();
+ 
+-    if ($DelegateMailServer && ($DelegateMailServer !~ /^\s*$/))
++    for my $domain ( $ddb->domains )
+     {
+-        $OUT .= "$DomainName:[$DelegateMailServer]\n";
++        my $mail_server = $domain->prop('MailServer')
++                          || $DelegateMailServer
++                          || 'localhost';
+ 
+-	use esmith::DomainsDB;
+-	my $ddb = esmith::DomainsDB->open_ro();
++        next if ( $mail_server eq 'localhost' );
+ 
+-	foreach $domain ( $ddb->domains )
+-        {
+-            $OUT .= $domain->key . ":[$DelegateMailServer]\n";
+-        }
++        $OUT .= $domain->key . ":[$mail_server]\n";
+     }
+ }
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.10.0/root/etc/e-smith/templates/var/qmail/control/virtualdomains/80localdomains mezzanine_patched_e-smith-qmail-1.10.0/root/etc/e-smith/templates/var/qmail/control/virtualdomains/80localdomains
+--- e-smith-qmail-1.10.0/root/etc/e-smith/templates/var/qmail/control/virtualdomains/80localdomains	2006-05-10 17:47:45.834404377 +1000
++++ mezzanine_patched_e-smith-qmail-1.10.0/root/etc/e-smith/templates/var/qmail/control/virtualdomains/80localdomains	2006-05-10 17:47:29.066282086 +1000
+@@ -1,19 +1,19 @@
+ {
+-    my $dms = $DelegateMailServer;
+-
+-    return "# DelegateMailServer is set" if ($dms && ($dms !~ /^\s*$/));
+-
+-    # All virtual domains will be delivered locally according to the
+-    # instructions in /var/qmail/alias/.qmail-localdelivery-default.
++    $OUT = '';
+ 
+     my $local_handler = "alias-localdelivery";
+ 
+     use esmith::DomainsDB;
+-    my $domainsdb = esmith::DomainsDB->open;
++    my $domainsdb = esmith::DomainsDB->open_ro();
+ 
+-    # Handle each defined virtual domain
+-    foreach my $domain ($domainsdb->get_all_by_prop(type => "domain"))
++    for my $domain ($domainsdb->domains)
+     {
++        my $mail_server = $domain->prop('MailServer')
++                          || $DelegateMailServer
++                          || 'localhost';
++
++        next if ( $mail_server ne 'localhost' );
++
+ 	$domain = $domain->key;
+ 	$OUT .= "$domain:$local_handler\n";
+     }
