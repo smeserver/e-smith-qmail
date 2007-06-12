@@ -1,0 +1,6 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.10.0/root/etc/e-smith/templates/var/qmail/control/helohost mezzanine_patched_e-smith-qmail-1.10.0/root/etc/e-smith/templates/var/qmail/control/helohost
+--- e-smith-qmail-1.10.0/root/etc/e-smith/templates/var/qmail/control/helohost	2006-01-11 18:04:56.000000000 +1100
++++ mezzanine_patched_e-smith-qmail-1.10.0/root/etc/e-smith/templates/var/qmail/control/helohost	2006-08-03 08:37:57.015071135 +1000
+@@ -1 +1 @@
+-{ $DomainName }
++{ $smtpd{HeloHost} || $DomainName }
