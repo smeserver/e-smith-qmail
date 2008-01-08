@@ -19,7 +19,7 @@ Patch7: e-smith-qmail-1.10.0-forcejunkmaildir.patch
 Patch8: e-smith-qmail-1.10.0-qmailadmin.patch
 Patch9: e-smith-qmail-1.10.0-sv.patch
 Patch10: e-smith-qmail-1.10.0-userName.patch
-Patch11: e-smith-qmail-1.10.0-catchall.patch
+Patch11: e-smith-qmail-1.10.0-catchall.patch2
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
 BuildArchitectures: noarch

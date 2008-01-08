@@ -17,7 +17,7 @@ diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.10.0/root/etc/e-smith/templates
 -	$domain = $domain->key;
 -	$OUT .= "$domain:$local_handler\n";
 +	$emaildomain = $domain->key;
-+	my $handler = $domain->prop('CatchAll') || "alias-localdelivery";
++	my $handler = $domain->prop('EmailTo') || "alias-localdelivery";
 +	$OUT .= "$emaildomain:$handler\n";
      }
  }
