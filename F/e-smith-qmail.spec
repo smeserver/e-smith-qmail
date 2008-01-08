@@ -2,7 +2,7 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.10.0
-%define release 14
+%define release 15
 Version: %{version}
 Release: %{release}%{?dist}
 License: GPL
@@ -19,6 +19,7 @@ Patch7: e-smith-qmail-1.10.0-forcejunkmaildir.patch
 Patch8: e-smith-qmail-1.10.0-qmailadmin.patch
 Patch9: e-smith-qmail-1.10.0-sv.patch
 Patch10: e-smith-qmail-1.10.0-userName.patch
+Patch11: e-smith-qmail-1.10.0-catchall.patch
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
 BuildArchitectures: noarch
@@ -34,6 +35,9 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Wed Jan 09 2008 Stephen Noble <support@dungog.net> 1.10.0-15
+- Domain catchall Redirection to Account [SME:1922]
+
 * Thu Sep  6 2007 Charlie Brady <charlie_brady@mitel.com>
 - Apply a code tidyup patch from Gordon. [SME: 871]
 
@@ -315,6 +319,7 @@ Startup scripts for Dan Bernstein's qmail package.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
 
 %build
 perl createlinks
