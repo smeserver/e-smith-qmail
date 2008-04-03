@@ -2,7 +2,7 @@ Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 1.10.0
-%define release 15
+%define release 16
 Version: %{version}
 Release: %{release}%{?dist}
 License: GPL
@@ -20,6 +20,7 @@ Patch8: e-smith-qmail-1.10.0-qmailadmin.patch
 Patch9: e-smith-qmail-1.10.0-sv.patch
 Patch10: e-smith-qmail-1.10.0-userName.patch
 Patch11: e-smith-qmail-1.10.0-catchall.patch2
+Patch12: e-smith-qmail-1.10.0-tcpto.patch
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
 BuildArchitectures: noarch
@@ -35,6 +36,9 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Wed Apr 2 2008 Shad L. Lords <slords@mail.com> 1.10.0-16
+- Create tcpto lockfile in run script [SME: 3055]
+
 * Wed Jan 09 2008 Stephen Noble <support@dungog.net> 1.10.0-15
 - Domain catchall Redirection to Account [SME:1922]
 
@@ -320,6 +324,7 @@ Startup scripts for Dan Bernstein's qmail package.
 %patch9 -p1
 %patch10 -p1
 %patch11 -p1
+%patch12 -p1
 
 %build
 perl createlinks
