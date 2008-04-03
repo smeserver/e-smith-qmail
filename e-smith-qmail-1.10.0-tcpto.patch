@@ -1,0 +1,17 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.10.0/root/var/service/qmail/run mezzanine_patched_e-smith-qmail-1.10.0/root/var/service/qmail/run
+--- e-smith-qmail-1.10.0/root/var/service/qmail/run	2008-04-02 21:42:39.000000000 -0600
++++ mezzanine_patched_e-smith-qmail-1.10.0/root/var/service/qmail/run	2008-04-02 21:41:25.000000000 -0600
+@@ -18,6 +18,13 @@
+ # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+ # 
+ #----------------------------------------------------------------------
++if [ ! -f /var/qmail/queue/lock/tcpto ]
++then
++    dd bs=1024 count=1 if=/dev/zero of=/var/qmail/queue/lock/tcpto
++    chown qmailr:qmail /var/qmail/queue/lock/tcpto
++    chmod 644 /var/qmail/queue/lock/tcpto
++fi
++
+ exec									\
+     /usr/bin/env - PATH="/var/qmail/bin:/bin:/usr/bin:/usr/local/bin"	\
+     LD_PRELOAD=$(pwd)/no_connect_zero.so \
