@@ -1,26 +1,15 @@
+# $Id: e-smith-qmail.spec,v 1.5 2008/10/07 19:15:56 slords Exp $
+
 Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
-%define version 1.10.0
-%define release 16
+%define version 2.2.0
+%define release 1
 Version: %{version}
 Release: %{release}%{?dist}
 License: GPL
 Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
-Patch0: e-smith-qmail-1.10.0.no_connect_zero.patch
-Patch1: e-smith-qmail-1.10.0-update-groups.patch
-Patch2: e-smith-qmail-1.10.0-DomainMailOnly.patch
-Patch3: e-smith-qmail-1.10.0-MailRouting.patch 
-Patch4: e-smith-qmail-1.10.0-MaxMessageSize.patch
-Patch5: e-smith-qmail-1.10.0-helohost.patch
-Patch6: e-smith-qmail-1.10.0-ExcludeFromEveryoneEmail.patch
-Patch7: e-smith-qmail-1.10.0-forcejunkmaildir.patch
-Patch8: e-smith-qmail-1.10.0-qmailadmin.patch
-Patch9: e-smith-qmail-1.10.0-sv.patch
-Patch10: e-smith-qmail-1.10.0-userName.patch
-Patch11: e-smith-qmail-1.10.0-catchall.patch2
-Patch12: e-smith-qmail-1.10.0-tcpto.patch
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
 BuildArchitectures: noarch
@@ -36,6 +25,9 @@ Obsoletes: qmail-initscripts
 AutoReqProv: no
 
 %changelog
+* Tue Oct 7 2008 Shad L. Lords <slords@mail.com> 2.2.0-1.sme
+- Roll new stream to separate sme7/sme8 trees [SME: 4633]
+
 * Wed Apr 2 2008 Shad L. Lords <slords@mail.com> 1.10.0-16
 - Create tcpto lockfile in run script [SME: 3055]
 
@@ -312,19 +304,6 @@ Startup scripts for Dan Bernstein's qmail package.
 
 %prep
 %setup
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
 
 %build
 perl createlinks

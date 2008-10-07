@@ -1,6 +1,0 @@
-diff -Nur -x '*.orig' -x '*.rej' e-smith-qmail-1.10.0/root/etc/e-smith/templates-user/.qmail-junkmail/10deliver_to_junkmail mezzanine_patched_e-smith-qmail-1.10.0/root/etc/e-smith/templates-user/.qmail-junkmail/10deliver_to_junkmail
---- e-smith-qmail-1.10.0/root/etc/e-smith/templates-user/.qmail-junkmail/10deliver_to_junkmail	2006-01-11 18:04:56.000000000 +1100
-+++ mezzanine_patched_e-smith-qmail-1.10.0/root/etc/e-smith/templates-user/.qmail-junkmail/10deliver_to_junkmail	2006-08-25 13:08:23.079987814 +1000
-@@ -1 +1,2 @@
-+| [ -d ./Maildir/.junkmail/ ] || /var/qmail/bin/maildirmake ./Maildir/.junkmail/
- ./Maildir/.junkmail/
