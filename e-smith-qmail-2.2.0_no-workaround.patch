@@ -1,0 +1,11 @@
+diff -Nur e-smith-qmail-2.2.0-old/root/var/service/qmail/run e-smith-qmail-2.2.0/root/var/service/qmail/run
+--- e-smith-qmail-2.2.0-old/root/var/service/qmail/run	2008-10-07 19:37:10.000000000 +0200
++++ e-smith-qmail-2.2.0/root/var/service/qmail/run	2009-05-12 16:40:15.000000000 +0200
+@@ -27,7 +27,6 @@
+ 
+ exec									\
+     /usr/bin/env - PATH="/var/qmail/bin:/bin:/usr/bin:/usr/local/bin"	\
+-    LD_PRELOAD=$(pwd)/no_connect_zero.so \
+     /var/qmail/bin/qmail-start						\
+     ./Maildir/								\
+     2>&1
