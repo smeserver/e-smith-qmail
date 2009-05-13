@@ -1,15 +1,16 @@
-# $Id: e-smith-qmail.spec,v 1.5 2008/10/07 19:15:56 slords Exp $
+# $Id: e-smith-qmail.spec,v 1.6 2009/05/13 15:11:42 filippocarletti Exp $
 
 Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 2.0.0
-%define release 1
+%define release 2
 Version: %{version}
 Release: %{release}%{?dist}
 License: GPL
 Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
+Patch0: e-smith-qmail-2.2.0_no-workaround.patch
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
 BuildArchitectures: noarch
@@ -18,13 +19,18 @@ Requires: dot-forward
 Requires: fastforward
 Requires: runit
 Requires: e-smith-email
-Requires: qmail-workaround
+Requires: qmail >= 1.03-17
 Provides: e-smith-mta
 Conflicts: runit < 1.7
 Obsoletes: qmail-initscripts
+Obsoletes: qmail-workaround
 AutoReqProv: no
 
 %changelog
+* Tue May 12 2009 Filippo Carletti <filippo.carletti@gmail.com> 2.0.0-2
+- Remove qmail-workaround and obsolete it after patch to treat 0.0.0.0 as a 
+  local ip [SME: 5171]
+
 * Tue Oct 7 2008 Shad L. Lords <slords@mail.com> 2.0.0-1.sme
 - Roll new stream to separate sme7/sme8 trees [SME: 4633]
 
@@ -304,6 +310,7 @@ Startup scripts for Dan Bernstein's qmail package.
 
 %prep
 %setup
+%patch0 -p1
 
 %build
 perl createlinks
