@@ -1,4 +1,4 @@
-# $Id: e-smith-qmail.spec,v 1.7 2009/05/18 16:24:15 bytegw Exp $
+# $Id: e-smith-qmail.spec,v 1.8 2009/05/18 16:36:35 bytegw Exp $
 
 Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
@@ -11,7 +11,7 @@ License: GPL
 Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
 Patch0: e-smith-qmail-2.2.0_no-workaround.patch
-Patch1: e-smith-qmail-2.0.0-IncorrectUseOfBrackets.patch
+Patch1: e-smith-qmail-2.2.0-IncorrectUseOfBrackets.patch
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
 BuildArchitectures: noarch
