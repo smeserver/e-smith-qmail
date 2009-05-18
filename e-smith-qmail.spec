@@ -1,16 +1,17 @@
-# $Id: e-smith-qmail.spec,v 1.6 2009/05/12 16:25:41 filippocarletti Exp $
+# $Id: e-smith-qmail.spec,v 1.7 2009/05/18 16:24:15 bytegw Exp $
 
 Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 2.2.0
-%define release 2
+%define release 3
 Version: %{version}
 Release: %{release}%{?dist}
 License: GPL
 Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
 Patch0: e-smith-qmail-2.2.0_no-workaround.patch
+Patch1: e-smith-qmail-2.0.0-IncorrectUseOfBrackets.patch
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
 BuildArchitectures: noarch
@@ -27,6 +28,9 @@ Obsoletes: qmail-workaround
 AutoReqProv: no
 
 %changelog
+* Mon May 18 2009 Gavin Weight <gweight@gmail.com> 2.2.0-3
+- smtproutes template incorrectly uses brackets to avoid MX lookups. [SME: 5257]
+
 * Tue May 12 2009 Filippo Carletti <filippo.carletti@gmail.com> 2.2.0-2
 - Remove qmail-workaround and obsolete it after patch to treat 0.0.0.0 as a 
   local ip [SME: 5171]
@@ -311,6 +315,7 @@ Startup scripts for Dan Bernstein's qmail package.
 %prep
 %setup
 %patch0 -p1
+%patch1 -p1
 
 %build
 perl createlinks

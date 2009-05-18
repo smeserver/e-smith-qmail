@@ -1,0 +1,10 @@
+--- e-smith-qmail-2.2.0/root/etc/e-smith/templates/var/qmail/control/smtproutes/10delegateMailServer.IncorrectUseOfBrackets	2008-10-07 18:37:10.000000000 +0100
++++ e-smith-qmail-2.2.0/root/etc/e-smith/templates/var/qmail/control/smtproutes/10delegateMailServer	2009-05-18 17:21:12.000000000 +0100
+@@ -12,6 +12,6 @@
+ 
+         next if ( $mail_server eq 'localhost' );
+ 
+-        $OUT .= $domain->key . ":[$mail_server]\n";
++        $OUT .= $domain->key . ":$mail_server\n";
+     }
+ }
