@@ -1,10 +1,10 @@
-# $Id: e-smith-qmail.spec,v 1.8 2009/05/18 16:36:35 bytegw Exp $
+# $Id: e-smith-qmail.spec,v 1.9 2009/09/05 14:46:51 bytegw Exp $
 
 Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 2.2.0
-%define release 3
+%define release 4
 Version: %{version}
 Release: %{release}%{?dist}
 License: GPL
@@ -12,6 +12,7 @@ Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
 Patch0: e-smith-qmail-2.2.0_no-workaround.patch
 Patch1: e-smith-qmail-2.2.0-IncorrectUseOfBrackets.patch
+Patch2: e-smith-qmail-2.2.0-IncorrectUseOfBrackets2.patch
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
 BuildArchitectures: noarch
@@ -28,6 +29,9 @@ Obsoletes: qmail-workaround
 AutoReqProv: no
 
 %changelog
+* Sat Sep 05 2009 Gavin Weight <gweight@gmail.com> 2.2.0-4
+- SMTPSmartHost template incorrectly uses brackets to avoid MX lookups. [SME: 5456]
+
 * Mon May 18 2009 Gavin Weight <gweight@gmail.com> 2.2.0-3
 - smtproutes template incorrectly uses brackets to avoid MX lookups. [SME: 5257]
 
@@ -316,6 +320,7 @@ Startup scripts for Dan Bernstein's qmail package.
 %setup
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 perl createlinks
