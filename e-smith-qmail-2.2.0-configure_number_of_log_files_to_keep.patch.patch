@@ -1,0 +1,13 @@
+--- e-smith-qmail-2.2.0/root/var/service/qmail/log/run.configure_number_of_log_files_to_keep.patch	2006-01-11 08:04:56.000000000 +0100
++++ e-smith-qmail-2.2.0/root/var/service/qmail/log/run	2010-10-14 23:08:00.000000000 +0200
+@@ -21,7 +21,10 @@
+ # Please visit our web site www.e-smith.com for details.
+ #----------------------------------------------------------------------
+ 
++NUM=$(/sbin/e-smith/db configuration getprop qmail KeepLogFiles)
++
+ exec					\
+     /usr/local/bin/setuidgid qmaill	\
+     /usr/local/bin/multilog t s5000000	\
++    n${NUM:-10}			\
+     /var/log/qmail

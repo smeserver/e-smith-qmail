@@ -1,10 +1,10 @@
-# $Id: e-smith-qmail.spec,v 1.9 2009/09/05 14:46:51 bytegw Exp $
+# $Id: e-smith-qmail.spec,v 1.10 2010/10/14 21:25:06 vip-ire Exp $
 
 Summary: startup scripts for Dan Bernstein's qmail package
 %define name e-smith-qmail
 Name: %{name}
 %define version 2.2.0
-%define release 4
+%define release 5
 Version: %{version}
 Release: %{release}%{?dist}
 License: GPL
@@ -13,6 +13,7 @@ Source: %{name}-%{version}.tar.gz
 Patch0: e-smith-qmail-2.2.0_no-workaround.patch
 Patch1: e-smith-qmail-2.2.0-IncorrectUseOfBrackets.patch
 Patch2: e-smith-qmail-2.2.0-IncorrectUseOfBrackets2.patch
+Patch3: e-smith-qmail-2.2.0-configure_number_of_log_files_to_keep.patch.patch
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildRequires: e-smith-devtools >= 1.13.0-04
 BuildArchitectures: noarch
@@ -29,6 +30,9 @@ Obsoletes: qmail-workaround
 AutoReqProv: no
 
 %changelog
+* Thu Oct 14 2010 Daniel Berteaud <daniel@firewall-services.com> 2.2.0-5.sme
+- Read number of log files to keep from the DB [SME: 5855]
+
 * Sat Sep 05 2009 Gavin Weight <gweight@gmail.com> 2.2.0-4
 - SMTPSmartHost template incorrectly uses brackets to avoid MX lookups. [SME: 5456]
 
@@ -321,6 +325,7 @@ Startup scripts for Dan Bernstein's qmail package.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 perl createlinks
